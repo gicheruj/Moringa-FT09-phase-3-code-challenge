@@ -28,6 +28,15 @@ def create_tables():
             FOREIGN KEY (magazine_id) REFERENCES magazines (id)
         )
     ''')
-
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS author_magazine (
+            author_id INTEGER,
+            magazine_id INTEGER,
+            FOREIGN KEY (author_id) REFERENCES authors (id),
+            FOREIGN KEY (magazine_id) REFERENCES magazines (id),
+            PRIMARY KEY (author_id, magazine_id)
+        )
+    ''')
     conn.commit()
     conn.close()
+
